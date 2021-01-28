@@ -1,0 +1,2 @@
+# EngineRoom
+EngineRoom is a social medial application made for the purpose of learning web development.  It allows users to create accounts, make posts, upload their cars, and befriend other users.  It uses a React based frontend and an Nodejs/express based backend.  It's still a work in progress at the moment.  This repo is the backend code only.
