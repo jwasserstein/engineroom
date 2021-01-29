@@ -11,6 +11,7 @@
     - imageUrl
     - cars (ObjectIds)
     - posts (ObjectIds)
+    - friends (ObjectIds)
 - posts
     - user (ObjectId, populate for name and imageurl)
     - comments (ObjectIds)
@@ -38,6 +39,9 @@
     - get random users
 - posts
     - create post
+    - like comment
+    - unlike comment
+    - get posts from friends
 - comments
     - create comment
     - delete comment

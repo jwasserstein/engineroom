@@ -114,7 +114,11 @@ router.get('/:userId', async function(req, res) {
 										.populate({
 											path: 'posts', 
 											populate: {
-												path: 'comments'
+												path: 'comments',
+												populate: {
+													path: 'user',
+													select: 'imageUrl firstName lastName'
+												}
 											}
 										})
 										.exec();

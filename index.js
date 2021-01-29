@@ -6,6 +6,7 @@ const express       = require('express'),
 	  authRoutes    = require('./routes/auth'),
 	  carRoutes     = require('./routes/cars'),
 	  postRoutes    = require('./routes/posts'),
+	  commentRoutes = require('./routes/comments'),
 	  {redirectToHTTPS} = require('./middleware');
 
 app.use(redirectToHTTPS);
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/cars', carRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/posts/:postId/comments', commentRoutes);
 app.use(express.static('public'));
 
 app.use(function(req, res, next) {
