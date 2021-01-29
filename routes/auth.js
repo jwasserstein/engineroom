@@ -87,4 +87,43 @@ router.post('/changePassword', isUserLoggedIn, async function(req, res){
 	}
 });
 
+router.get('/random/:num', isUserLoggedIn, async function(req, res){
+	let {num} = req.params;
+
+	if(!(+num > 0) || (+num % 1 !== 0)) { // !(+num > 5) is false if num <= 0 OR num = undefined
+		return res.status(400).json({error: 'You must request a positive integer number of users'});
+	}
+
+	const count = await db.Users.countDocuments() - 1; // subtract one to account for curent user
+	num = Math.max(num, count);
+	const users = await db.Users.aggregate([
+		{$match: {_id: {$ne: `ObjectId(${res.locals.user.id})`}}},
+		{$project: {firstName: 1, lastName: 1, imageUrl: 1}},
+		{$sample: {size: num}}
+	]);
+
+	return res.json(users);
+});
+
+router.get('/:userId', async function(req, res) {
+	try {
+		const {userId} = req.params;
+
+		const user = await db.Users.findById(userId, {password: 0, joinDate: 0})
+										.populate('cars')
+										.populate({
+											path: 'posts', 
+											populate: {
+												path: 'comments'
+											}
+										})
+										.exec();
+		if(!user) return res.status(400).json({error: "That user id doesn't exist"});
+
+		return res.json(user);
+	} catch (err) {
+		return res.status(500).json({error: err.message});
+	}
+});
+
 module.exports = router;

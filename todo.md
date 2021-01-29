@@ -1,5 +1,6 @@
-# Todo
-- 
+## Todo
+- Add fields to signup input validation to match new fields in model
+- Fix /auth/random/:num route
 
 ## Models
 - users
@@ -36,6 +37,7 @@
     - sign up (create user)
     - sign in
     - get user (populate cars, posts, and comments)
+    - get random users
 - posts
     - create post
     - get posts for a user (populate comments, replace likers with numLikes and youLiked)
