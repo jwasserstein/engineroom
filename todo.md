@@ -38,7 +38,6 @@
     - get random users
 - posts
     - create post
-    - get posts for a user (populate comments, replace likers with numLikes and youLiked)
 - comments
     - create comment
     - delete comment
