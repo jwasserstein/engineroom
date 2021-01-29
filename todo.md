@@ -1,6 +1,4 @@
 ## Todo
-- Add fields to signup input validation to match new fields in model
-- Fix /auth/random/:num route
 
 ## Models
 - users

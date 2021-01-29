@@ -4,11 +4,12 @@ const express                = require('express'),
 	  bcrypt                 = require('bcrypt'),
 	  {isUserLoggedIn}       = require('../middleware/auth'),
 	  jwt                    = require('jsonwebtoken'),
-	  {checkMissingFields}   = require('../utils');
+	  {checkMissingFields}   = require('../utils'),
+	  mongoose               = require('mongoose');
 
 router.post('/signup', async function(req, res) {
 	try {
-		const missingFields = checkMissingFields(req.body, ['username', 'password']);
+		const missingFields = checkMissingFields(req.body, ['username', 'password', 'firstName', 'lastName']);
 		if(missingFields.length){
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
 		}
@@ -88,18 +89,17 @@ router.post('/changePassword', isUserLoggedIn, async function(req, res){
 });
 
 router.get('/random/:num', isUserLoggedIn, async function(req, res){
-	let {num} = req.params;
+	const {num} = req.params;
 
 	if(!(+num > 0) || (+num % 1 !== 0)) { // !(+num > 5) is false if num <= 0 OR num = undefined
 		return res.status(400).json({error: 'You must request a positive integer number of users'});
 	}
 
-	const count = await db.Users.countDocuments() - 1; // subtract one to account for curent user
-	num = Math.max(num, count);
+	const userId = new mongoose.mongo.ObjectID(res.locals.user.id);
 	const users = await db.Users.aggregate([
-		{$match: {_id: {$ne: `ObjectId(${res.locals.user.id})`}}},
+		{$match: {_id: {$ne: userId}}},
 		{$project: {firstName: 1, lastName: 1, imageUrl: 1}},
-		{$sample: {size: num}}
+		{$sample: {size: +num}}
 	]);
 
 	return res.json(users);
