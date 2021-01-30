@@ -29,4 +29,45 @@ router.post('/', isUserLoggedIn, async function(req, res){
     }
 });
 
+router.post('/:postId/like', isUserLoggedIn, async function(req, res){
+    try {
+        const {postId} = req.params;
+        
+        const post = await db.Posts.findById(postId);
+        const preFilterLikes = post.likers.length;
+        post.likers = post.likers.filter(l => l.toString() !== res.locals.user.id);
+        if(preFilterLikes === post.likers.length) {
+            post.likers.push(res.locals.user.id);
+        }
+        await post.save();
+        return res.json(post);
+    } catch(err) {
+        return res.status(500).json({error: err.message});
+    }
+});
+
+router.get('/', isUserLoggedIn, async function(req, res){
+    try {
+        const user = await db.Users.findById(res.locals.user.id);
+        const posts = await db.Posts.find({user: {$in: user.friends}}, null, {sort: {date: -1}})
+                                    .populate([
+                                        {
+                                            path: 'comments',
+                                            populate: {
+                                                path: 'user',
+                                                select: 'imageUrl firstName lastName'
+                                            }
+                                        },
+                                        {
+                                            path: 'user',
+                                            select: 'imageUrl firstName lastName'
+                                        }
+                                    ]);
+
+        return res.json(posts);
+    } catch(err) {
+        return res.status(500).json({error: err.message});
+    }
+});
+
 module.exports = router;

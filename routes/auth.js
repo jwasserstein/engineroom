@@ -130,4 +130,22 @@ router.get('/:userId', async function(req, res) {
 	}
 });
 
+router.post('/:friendId/friend', isUserLoggedIn, async function(req, res){
+	try {
+		const {friendId} = req.params;
+		
+		const user = await db.Users.findById(res.locals.user.id);
+
+		const numFriends = user.friends.length;
+		user.friends = user.friends.filter(f => f.toString() !== friendId);
+		if(user.friends.length === numFriends) {
+			user.friends.push(friendId);
+		}
+		await user.save();
+		return res.json(user);
+	} catch (err) {
+		return res.status(500).json({error: err.message});
+	}
+});
+
 module.exports = router;

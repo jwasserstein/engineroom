@@ -37,10 +37,10 @@
     - sign in
     - get user (populate cars, posts, and comments)
     - get random users
+    - toggle friend
 - posts
     - create post
-    - like comment
-    - unlike comment
+    - toggle like on post
     - get posts from friends
 - comments
     - create comment
