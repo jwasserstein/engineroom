@@ -47,7 +47,7 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
 
         const cars = await db.Cars.aggregate([
             {$match: {user: {$ne: userId}}},
-            {$project: {name: 1, imageUrl: 1}},
+            {$project: {name: 1, imageUrl: 1, user: 1}},
             {$sample: {size: +num}}
         ]);
 
