@@ -25,7 +25,13 @@ router.post('/', isUserLoggedIn, async function(req, res){
         post.comments.push(comment._id);
         await post.save();
 
-        return res.json(comment);
+        const populatedComment = await db.Comments.findById(comment._id)
+                                                    .populate({
+                                                        path: 'user',
+                                                        select: 'imageUrl firstName lastName'
+                                                    });
+
+        return res.json(populatedComment);
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
