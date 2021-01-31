@@ -12,9 +12,10 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
         return res.status(400).json({error: 'You must request a positive integer number of users'});
     }
 
-    const userId = new mongoose.mongo.ObjectID(res.locals.user.id);
+    const user = await db.Users.findById(res.locals.user.id);
+    
     const users = await db.Users.aggregate([
-        {$match: {_id: {$ne: userId}}},
+        {$match: {_id: {$nin: [...user.friends, user._id]}}},
         {$project: {firstName: 1, lastName: 1, imageUrl: 1}},
         {$sample: {size: +num}}
     ]);

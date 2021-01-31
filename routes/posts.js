@@ -2,7 +2,8 @@ const express              = require('express'),
       router               = express.Router({mergeParams: true}),
       db                   = require('../models'),
       {isUserLoggedIn}     = require('../middleware/auth'),
-      {checkMissingFields} = require('../utils');
+      {checkMissingFields} = require('../utils'),
+      mongoose             = require('mongoose');
 
 router.post('/', isUserLoggedIn, async function(req, res){
     try {
@@ -23,7 +24,22 @@ router.post('/', isUserLoggedIn, async function(req, res){
         user.posts.push(post._id);
         await user.save();
 
-        return res.json(post);
+        const populatedPost = await db.Posts.findById(post._id)
+                                    .populate([
+                                        {
+                                            path: 'comments',
+                                            populate: {
+                                                path: 'user',
+                                                select: 'imageUrl firstName lastName'
+                                            }
+                                        },
+                                        {
+                                            path: 'user',
+                                            select: 'imageUrl firstName lastName'
+                                        }
+                                    ]);
+
+        return res.json(populatedPost);
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
@@ -49,7 +65,7 @@ router.post('/:postId/like', isUserLoggedIn, async function(req, res){
 router.get('/', isUserLoggedIn, async function(req, res){
     try {
         const user = await db.Users.findById(res.locals.user.id);
-        const posts = await db.Posts.find({user: {$in: user.friends}}, null, {sort: {date: -1}})
+        const posts = await db.Posts.find({user: {$in: [...user.friends, mongoose.Types.ObjectId(res.locals.user.id)]}}, null, {sort: {date: -1}})
                                     .populate([
                                         {
                                             path: 'comments',
