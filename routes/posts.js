@@ -40,7 +40,7 @@ router.post('/:postId/like', isUserLoggedIn, async function(req, res){
             post.likers.push(res.locals.user.id);
         }
         await post.save();
-        return res.json(post);
+        return res.json(post.likers);
     } catch(err) {
         return res.status(500).json({error: err.message});
     }

@@ -7,12 +7,14 @@ const express       = require('express'),
 	  carRoutes     = require('./routes/cars'),
 	  postRoutes    = require('./routes/posts'),
 	  commentRoutes = require('./routes/comments'),
+	  userRoutes    = require('./routes/users'),
 	  {redirectToHTTPS} = require('./middleware');
 
 app.use(redirectToHTTPS);
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/cars', carRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/posts/:postId/comments', commentRoutes);
