@@ -31,13 +31,19 @@ router.get('/:userId', isUserLoggedIn, async function(req, res) {
                                         .populate('cars')
                                         .populate({
                                             path: 'posts', 
-                                            populate: {
-                                                path: 'comments',
-                                                populate: {
+                                            populate: [
+                                                {
+                                                    path: 'comments',
+                                                    populate: {
+                                                        path: 'user',
+                                                        select: 'imageUrl firstName lastName'
+                                                    }
+                                                },
+                                                {
                                                     path: 'user',
                                                     select: 'imageUrl firstName lastName'
                                                 }
-                                            }
+                                            ]
                                         })
                                         .exec();
         if(!user) return res.status(400).json({error: "That user id doesn't exist"});

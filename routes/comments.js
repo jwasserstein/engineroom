@@ -53,11 +53,9 @@ router.delete('/:commentId', isUserLoggedIn, async function(req, res){
         post.comments = post.comments.filter(c => c.id !== commentId);
         post.save();
 
-        const deletedComment = db.Comments.findByIdAndDelete(commentId);
-
-        console.log(deletedComment);
+        const deletedComment = await db.Comments.findByIdAndDelete(commentId);
         
-        return res.json(comment);
+        return res.json(deletedComment);
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
