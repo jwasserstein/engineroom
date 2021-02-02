@@ -24,20 +24,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
         user.posts.push(post._id);
         await user.save();
 
-        const populatedPost = await db.Posts.findById(post._id)
-                                    .populate([
-                                        {
-                                            path: 'comments',
-                                            populate: {
-                                                path: 'user',
-                                                select: 'imageUrl firstName lastName'
-                                            }
-                                        },
-                                        {
-                                            path: 'user',
-                                            select: 'imageUrl firstName lastName'
-                                        }
-                                    ]);
+        const populatedPost = await db.Posts.findById(post._id);
 
         return res.json(populatedPost);
     } catch(err) {
@@ -66,21 +53,22 @@ router.get('/', isUserLoggedIn, async function(req, res){
     try {
         const user = await db.Users.findById(res.locals.user.id);
         const posts = await db.Posts.find({user: {$in: [...user.friends, mongoose.Types.ObjectId(res.locals.user.id)]}}, null, {sort: {date: -1}})
-                                    .populate([
-                                        {
-                                            path: 'comments',
-                                            populate: {
-                                                path: 'user',
-                                                select: 'imageUrl firstName lastName'
-                                            }
-                                        },
-                                        {
-                                            path: 'user',
-                                            select: 'imageUrl firstName lastName'
-                                        }
-                                    ]);
+                                    .populate('comments');
 
-        return res.json(posts);
+        const additionalUserIds = [];
+        for(let i = 0; i < posts.length; i++){
+            if(!posts[i].user.equals(user._id)) {
+                additionalUserIds.push(posts[i].user);
+            }
+            for(let j = 0; j < posts[i].comments.length; j++){
+                if(!posts[i].comments[j].user.equals(user._id)) {
+                    additionalUserIds.push(posts[i].comments[j].user);
+                }
+            }
+        }
+        const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
+
+        return res.json({posts: posts, users: additionalUsers});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
