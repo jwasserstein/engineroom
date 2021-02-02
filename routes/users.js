@@ -19,36 +19,34 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
         {$project: {firstName: 1, lastName: 1, imageUrl: 1}},
         {$sample: {size: +num}}
     ]);
+    
+    const userIds = users.map(u => u._id);
 
-    return res.json(users);
+    return res.json({userIds: userIds, users: users});
 });
 
 router.get('/:userId', isUserLoggedIn, async function(req, res) {
     try {
         const {userId} = req.params;
 
-        const user = await db.Users.findById(userId, {password: 0})
-                                        .populate('cars')
-                                        .populate({
-                                            path: 'posts', 
-                                            populate: [
-                                                {
-                                                    path: 'comments',
-                                                    populate: {
-                                                        path: 'user',
-                                                        select: 'imageUrl firstName lastName'
-                                                    }
-                                                },
-                                                {
-                                                    path: 'user',
-                                                    select: 'imageUrl firstName lastName'
-                                                }
-                                            ]
-                                        })
-                                        .exec();
+        const user = await db.Users.findById(userId, {password: 0});
         if(!user) return res.status(400).json({error: "That user id doesn't exist"});
 
-        return res.json(user);
+        const cars = await db.Cars.find({_id: {$in: user.cars}});
+        const posts = await db.Posts.find({_id: {$in: user.posts}})
+                                        .populate('comments');
+
+        const additionalUserIds = [];
+        for(let i = 0; i < posts.length; i++){
+            for(let j = 0; j < posts[i].comments.length; j++){
+                if(!posts[i].comments[j].user.equals(user._id)) {
+                    additionalUserIds.push(posts[i].comments[j].user);
+                }
+            }
+        }
+        const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
+
+        return res.json({users: [user, ...additionalUsers], cars: cars, posts: posts});
     } catch (err) {
         return res.status(500).json({error: err.message});
     }
