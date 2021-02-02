@@ -26,7 +26,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
 
         const populatedPost = await db.Posts.findById(post._id);
 
-        return res.json(populatedPost);
+        return res.json({posts: [populatedPost]});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
@@ -43,7 +43,7 @@ router.post('/:postId/like', isUserLoggedIn, async function(req, res){
             post.likers.push(res.locals.user.id);
         }
         await post.save();
-        return res.json(post.likers);
+        return res.json({posts: [post]});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }

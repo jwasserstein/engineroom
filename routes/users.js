@@ -16,7 +16,7 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
     
     const users = await db.Users.aggregate([
         {$match: {_id: {$nin: [...user.friends, user._id]}}},
-        {$project: {firstName: 1, lastName: 1, imageUrl: 1}},
+        {$project: {password: 0}},
         {$sample: {size: +num}}
     ]);
     
@@ -64,7 +64,7 @@ router.post('/:friendId/friend', isUserLoggedIn, async function(req, res){
             user.friends.push(friendId);
         }
         await user.save();
-        return res.json(user);
+        return res.json({users: [user]});
     } catch (err) {
         return res.status(500).json({error: err.message});
     }

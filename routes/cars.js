@@ -30,7 +30,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
         user.cars.push(car._id);
         await user.save();
 
-        return res.json(car);
+        return res.json({cars: [car]});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
@@ -47,11 +47,10 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
 
         const cars = await db.Cars.aggregate([
             {$match: {user: {$ne: userId}}},
-            {$project: {name: 1, imageUrl: 1, user: 1}},
             {$sample: {size: +num}}
         ]);
 
-        return res.json(cars);
+        return res.json({cars: cars});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
