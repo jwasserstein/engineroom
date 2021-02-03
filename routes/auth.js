@@ -22,8 +22,6 @@ router.post('/signup', async function(req, res) {
 		return res.status(201).json({
 			id: user._id,
 			username: user.username,
-			joinDate: user.joinDate,
-			imageUrl: user.imageUrl,
 			token
 		});
 	} catch (err) {
@@ -51,8 +49,6 @@ router.post('/signin', async function (req, res) {
 			return res.json({
 				id: user._id,
 				username: user.username,
-				joinDate: user.joinDate,
-				imageUrl: user.imageUrl,
 				token
 			});
 		} else {

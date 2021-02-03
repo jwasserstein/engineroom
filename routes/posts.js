@@ -70,13 +70,9 @@ router.get('/', isUserLoggedIn, async function(req, res){
 
         const additionalUserIds = [];
         for(let i = 0; i < posts.length; i++){
-            if(!posts[i].user.equals(user._id)) {
-                additionalUserIds.push(posts[i].user);
-            }
+            additionalUserIds.push(posts[i].user);
             for(let j = 0; j < posts[i].comments.length; j++){
-                if(!posts[i].comments[j].user.equals(user._id)) {
-                    additionalUserIds.push(posts[i].comments[j].user);
-                }
+                additionalUserIds.push(posts[i].comments[j].user);
             }
         }
         const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
