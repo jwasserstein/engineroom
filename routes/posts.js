@@ -53,7 +53,7 @@ router.get('/', isUserLoggedIn, async function(req, res){
     try {
         const user = await db.Users.findById(res.locals.user.id);
 
-        let posts;
+        let posts, feedPostIds;
         if(req.query.ids){
             // if a query string of post ids /posts?ids=[xxx, yyy, zzz] is provided, respond with the requested posts
             let ids = JSON.parse(req.query.ids);
@@ -65,22 +65,26 @@ router.get('/', isUserLoggedIn, async function(req, res){
             // if no query string is provided, respond with most recent posts from user and their friends
             posts = await db.Posts.find({user: {$in: [...user.friends, mongoose.Types.ObjectId(res.locals.user.id)]}}, null, {sort: {date: -1}})
                                         .populate('comments');
+            feedPostIds = posts.map(p => p._id);
         }
 
         const additionalUserIds = [];
-            for(let i = 0; i < posts.length; i++){
-                if(!posts[i].user.equals(user._id)) {
-                    additionalUserIds.push(posts[i].user);
-                }
-                for(let j = 0; j < posts[i].comments.length; j++){
-                    if(!posts[i].comments[j].user.equals(user._id)) {
-                        additionalUserIds.push(posts[i].comments[j].user);
-                    }
+        for(let i = 0; i < posts.length; i++){
+            if(!posts[i].user.equals(user._id)) {
+                additionalUserIds.push(posts[i].user);
+            }
+            for(let j = 0; j < posts[i].comments.length; j++){
+                if(!posts[i].comments[j].user.equals(user._id)) {
+                    additionalUserIds.push(posts[i].comments[j].user);
                 }
             }
-            const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
+        }
+        const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
 
-            return res.json({posts: posts, users: additionalUsers});
+        const resp = {posts: posts, users: additionalUsers};
+        if(feedPostIds) resp.feedPostIds = feedPostIds;
+
+        return res.json(resp);
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
