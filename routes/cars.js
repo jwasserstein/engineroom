@@ -56,4 +56,20 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
     }
 });
 
+router.get('/', isUserLoggedIn, async function(req, res){
+    try {
+        const user = await db.Users.findById(res.locals.user.id);
+
+        let ids = JSON.parse(req.query.ids);
+        if(!ids.length) return res.status(400).json({error: "You must provide an array of car ids as a query string parameter called 'ids'"});
+        ids = ids.map(i => mongoose.Types.ObjectId(i));
+
+        const cars = await db.Cars.find({_id: {$in: ids}});
+
+        return res.json({cars});
+    } catch(err) {
+        return res.status(500).json({error: err.message});
+    }
+});
+
 module.exports = router;
