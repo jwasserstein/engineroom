@@ -22,7 +22,7 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
     
     const userIds = users.map(u => u._id);
 
-    return res.json({userIds: userIds, users: users});
+    return res.json({randomUserIds: userIds, users: users});
 });
 
 router.get('/:userId', isUserLoggedIn, async function(req, res) {

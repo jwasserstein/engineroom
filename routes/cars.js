@@ -50,7 +50,9 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
             {$sample: {size: +num}}
         ]);
 
-        return res.json({cars: cars});
+        const carIds = cars.map(c => c._id);
+
+        return res.json({randomCarIds: carIds, cars: cars});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
