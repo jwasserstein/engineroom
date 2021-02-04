@@ -64,7 +64,11 @@ router.post('/:friendId/friend', isUserLoggedIn, async function(req, res){
             user.friends.push(friendId);
         }
         await user.save();
-        return res.json({users: [user]});
+
+        const userObj = user.toObject();
+        delete userObj.password;
+
+        return res.json({id: user._id, username: user.username, user: userObj});
     } catch (err) {
         return res.status(500).json({error: err.message});
     }
