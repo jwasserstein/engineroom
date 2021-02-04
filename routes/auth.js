@@ -19,9 +19,13 @@ router.post('/signup', async function(req, res) {
 			id: user._id,
 			username: user.username
 		}, process.env.SECRET_KEY);
+		const userObj = user.toObject();
+		delete userObj.password;
+
 		return res.status(201).json({
 			id: user._id,
 			username: user.username,
+			user: userObj,
 			token
 		});
 	} catch (err) {
@@ -46,9 +50,13 @@ router.post('/signin', async function (req, res) {
 				id: user._id,
 				username: user.username
 			}, process.env.SECRET_KEY);
+
+			const userObj = user.toObject();
+			delete userObj.password;
 			return res.json({
 				id: user._id,
 				username: user.username,
+				user: userObj,
 				token
 			});
 		} else {
