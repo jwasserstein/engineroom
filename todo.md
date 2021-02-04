@@ -1,4 +1,5 @@
 ## Todo
+- Look into the way friending works.  Should it be like facebook where you need to friend each other, or like twitter where friendship can be one-way?  Does the current route correctly implemenet whichever you prefer?
 
 ## Models
 - users

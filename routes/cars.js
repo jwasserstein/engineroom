@@ -30,7 +30,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
         user.cars.push(car._id);
         await user.save();
 
-        return res.json(car);
+        return res.json({cars: [car]});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
@@ -47,11 +47,28 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
 
         const cars = await db.Cars.aggregate([
             {$match: {user: {$ne: userId}}},
-            {$project: {name: 1, imageUrl: 1, user: 1}},
             {$sample: {size: +num}}
         ]);
 
-        return res.json(cars);
+        const carIds = cars.map(c => c._id);
+
+        return res.json({randomCarIds: carIds, cars: cars});
+    } catch(err) {
+        return res.status(500).json({error: err.message});
+    }
+});
+
+router.get('/', isUserLoggedIn, async function(req, res){
+    try {
+        const user = await db.Users.findById(res.locals.user.id);
+
+        let ids = JSON.parse(req.query.ids);
+        if(!ids.length) return res.status(400).json({error: "You must provide an array of car ids as a query string parameter called 'ids'"});
+        ids = ids.map(i => mongoose.Types.ObjectId(i));
+
+        const cars = await db.Cars.find({_id: {$in: ids}});
+
+        return res.json({cars});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
