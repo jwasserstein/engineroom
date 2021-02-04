@@ -36,7 +36,7 @@ router.post('/:postId/like', isUserLoggedIn, async function(req, res){
     try {
         const {postId} = req.params;
         
-        const post = await db.Posts.findById(postId);
+        const post = await db.Posts.findById(postId).populate('comments');
         const preFilterLikes = post.likers.length;
         post.likers = post.likers.filter(l => l.toString() !== res.locals.user.id);
         if(preFilterLikes === post.likers.length) {
