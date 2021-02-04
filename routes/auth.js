@@ -25,7 +25,7 @@ router.post('/signup', async function(req, res) {
 		return res.status(201).json({
 			id: user._id,
 			username: user.username,
-			user: userObj,
+			users: [userObj],
 			token
 		});
 	} catch (err) {
@@ -56,7 +56,7 @@ router.post('/signin', async function (req, res) {
 			return res.json({
 				id: user._id,
 				username: user.username,
-				user: userObj,
+				users: [userObj],
 				token
 			});
 		} else {
