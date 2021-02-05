@@ -25,28 +25,38 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
     return res.json({randomUserIds: userIds, users: users});
 });
 
-router.get('/:userId', isUserLoggedIn, async function(req, res) {
+router.get('/', isUserLoggedIn, async function(req, res) {
     try {
-        const {userId} = req.params;
+        const ids = JSON.parse(req.query.ids);
+        if(ids.length === 0) return res.status(400).json({error: "You must provide an array of user ids as a query string parameter called 'ids'"})
 
-        const user = await db.Users.findById(userId, {password: 0});
-        if(!user) return res.status(400).json({error: "That user id doesn't exist"});
-
-        const cars = await db.Cars.find({_id: {$in: user.cars}});
-        const posts = await db.Posts.find({_id: {$in: user.posts}})
-                                        .populate('comments');
-
-        const additionalUserIds = [];
-        for(let i = 0; i < posts.length; i++){
-            for(let j = 0; j < posts[i].comments.length; j++){
-                if(!posts[i].comments[j].user.equals(user._id)) {
-                    additionalUserIds.push(posts[i].comments[j].user);
-                }
-            }
+        const users = await db.Users.find({_id: {$in: ids.map(i => mongoose.Types.ObjectId(i))}}, {password: 0});
+        const resp = {users};
+        if(req.query.cars === 'true') {
+            const carIds = [];
+            users.forEach(u => u.cars.forEach(c => carIds.push(c)));
+            const cars = await db.Cars.find({_id: {$in: carIds}});
+            resp.cars = cars;
         }
-        const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
+        if(req.query.posts === 'true'){
+            const postIds = [];
+            users.forEach(u => u.posts.forEach(p => postIds.push(p)));
+            const posts = await db.Posts.find({_id: {$in: postIds}}).populate('comments');
+            resp.posts = posts;
 
-        return res.json({users: [user, ...additionalUsers], cars: cars, posts: posts});
+            const existingUserIds = new Set(ids);
+            const additionalUserIds = [];
+            posts.forEach(p => {
+                if(!existingUserIds.has(p.user.toString())) additionalUserIds.push(p.user);
+                p.comments.forEach(c => {
+                    if(!existingUserIds.has(c.user.toString())) additionalUserIds.push(c.user);
+                });
+            });
+            const additionalUsers = await db.Users.find({_id: {$in: additionalUserIds}}, {password: 0});
+            resp.users = resp.users.concat(additionalUsers);
+        }
+
+        return res.json(resp);
     } catch (err) {
         return res.status(500).json({error: err.message});
     }
