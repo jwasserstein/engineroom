@@ -21,12 +21,12 @@ router.post('/', isUserLoggedIn, async function(req, res){
             text,
             user: res.locals.user.id
         });
-        user.posts.push(post._id);
+        user.posts.unshift(post._id);
         await user.save();
 
         const populatedPost = await db.Posts.findById(post._id);
 
-        return res.json({posts: [populatedPost]});
+        return res.json({posts: [populatedPost], users: [user]});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }

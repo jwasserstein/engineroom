@@ -30,7 +30,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
         user.cars.push(car._id);
         await user.save();
 
-        return res.json({cars: [car]});
+        return res.json({cars: [car], users: [user]});
     } catch(err) {
         return res.status(500).json({error: err.message});
     }
