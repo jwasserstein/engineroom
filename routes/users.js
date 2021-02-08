@@ -2,6 +2,7 @@ const express                = require('express'),
 	  router                 = express.Router({mergeParams: true}),
 	  db                     = require('../models'),
 	  {isUserLoggedIn}       = require('../middleware/auth'),
+      {checkMissingFields}     = require('../utils'),
       mongoose               = require('mongoose');
 
 
@@ -80,6 +81,28 @@ router.post('/:friendId/friend', isUserLoggedIn, async function(req, res){
 
         return res.json({users: [userObj]});
     } catch (err) {
+        return res.status(500).json({error: err.message});
+    }
+});
+
+router.put('/', isUserLoggedIn, async function(req, res){
+    try {
+        const missingFields = checkMissingFields(req.body, ['firstName', 'lastName', 'bio', 'imageUrl']);
+		if(missingFields.length){
+			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
+        }
+        
+        const {firstName, lastName, bio, imageUrl} = req.body;
+
+        const user = await db.Users.findById(res.locals.user.id);
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.bio = bio;
+        user.imageUrl = imageUrl;
+        await user.save();
+
+        return res.json({users: [user]});
+    } catch(err) {
         return res.status(500).json({error: err.message});
     }
 });
