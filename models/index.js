@@ -1,5 +1,8 @@
 const mongoose = require('mongoose'),
-	  Users    = require('./users');
+	  Users    = require('./users'),
+	  Posts    = require('./posts'),
+	  Comments = require('./comments'),
+	  Cars     = require('./cars');
 
 const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/engineroom';
 
@@ -11,4 +14,4 @@ mongoose.connect(dbURI, {
 });
 mongoose.set('useCreateIndex', true);
 
-module.exports = {Users};
+module.exports = {Users, Posts, Comments, Cars};

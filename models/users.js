@@ -14,7 +14,35 @@ const userSchema = new mongoose.Schema({
 	joinDate: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	firstName: {
+		type: String,
+		required: true
+	},
+	lastName: {
+		type: String,
+		required: true
+	},
+	bio: {
+		type: String,
+		default: "I don't have a bio!"
+	},
+	imageUrl: {
+		type: String,
+		default: 'http://localhost:3001/images/default-profile.png'
+	},
+	cars: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'car'
+	}],
+	posts: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'post'
+	}],
+	friends: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'user'
+	}]
 });
 
 userSchema.pre('save', async function(next){

@@ -4,25 +4,31 @@ const express                = require('express'),
 	  bcrypt                 = require('bcrypt'),
 	  {isUserLoggedIn}       = require('../middleware/auth'),
 	  jwt                    = require('jsonwebtoken'),
-	  {checkMissingFields}   = require('../utils');
+	  {checkMissingFields}   = require('../utils'),
+	  mongoose               = require('mongoose');
 
 router.post('/signup', async function(req, res) {
 	try {
-		const missingFields = checkMissingFields(req.body, ['username', 'password']);
+		const missingFields = checkMissingFields(req.body, ['username', 'password', 'firstName', 'lastName']);
 		if(missingFields.length){
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
 		}
 		
+		const existingUser = await db.Users.findOne({username: req.body.username});
+		if(existingUser) return res.status(400).json({error: 'That username is already in use'});
+
 		const user = await db.Users.create(req.body);
 		const token = jwt.sign({
 			id: user._id,
-			username: user.username,
-			joinDate: user.joinDate
+			username: user.username
 		}, process.env.SECRET_KEY);
+		const userObj = user.toObject();
+		delete userObj.password;
+
 		return res.status(201).json({
 			id: user._id,
 			username: user.username,
-			joinDate: user.joinDate,
+			users: [userObj],
 			token
 		});
 	} catch (err) {
@@ -45,13 +51,15 @@ router.post('/signin', async function (req, res) {
 		if(isMatch){
 			const token = jwt.sign({
 				id: user._id,
-				username: user.username,
-				joinDate: user.joinDate
+				username: user.username
 			}, process.env.SECRET_KEY);
+
+			const userObj = user.toObject();
+			delete userObj.password;
 			return res.json({
 				id: user._id,
 				username: user.username,
-				joinDate: user.joinDate,
+				users: [userObj],
 				token
 			});
 		} else {
