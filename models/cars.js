@@ -12,7 +12,7 @@ const carSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        default: 'http://localhost:3001/images/default-car.png'
+        default: 'https://engineroom.s3.amazonaws.com/default-car.png'
     },
     mods: {
         type: String,

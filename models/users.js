@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
 	},
 	imageUrl: {
 		type: String,
-		default: 'http://localhost:3001/images/default-profile.png'
+		default: 'https://engineroom.s3.amazonaws.com/default-profile.png'
 	},
 	cars: [{
 		type: mongoose.Schema.Types.ObjectId,
