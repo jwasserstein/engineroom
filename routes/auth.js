@@ -14,6 +14,9 @@ router.post('/signup', async function(req, res) {
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
 		}
 		
+		const existingUser = await db.Users.findOne({username: req.body.username});
+		if(existingUser) return res.status(400).json({error: 'That username is already in use'});
+
 		const user = await db.Users.create(req.body);
 		const token = jwt.sign({
 			id: user._id,

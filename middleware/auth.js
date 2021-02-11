@@ -9,7 +9,7 @@ function isUserLoggedIn(req, res, next){
 			return res.status(401).json({error: 'Your token is invalid'});
 		}
 		if(Date.now()/1000 - decoded.iat > 3600) {
-			return res.status(401).json({error: 'Your token has expired'});
+			return res.status(401).json({error: 'Your session has expired, please log in again'});
 		}
 		res.locals.user = decoded;
 		return next();
