@@ -17,7 +17,13 @@ router.post('/signup', async function(req, res) {
 		const existingUser = await db.Users.findOne({username: req.body.username});
 		if(existingUser) return res.status(400).json({error: 'That username is already in use'});
 
-		const user = await db.Users.create(req.body);
+		const user = await db.Users.create({
+			username: req.body.username,
+			password: req.body.password, // Password is salted/hashed in pre-save hook
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			friends: ['60251c79d3f1260004db5452', '60257901e61a5d0004c81830', '60257c3fe61a5d0004c81832', '602586a9e61a5d0004c8183a']
+		});
 		const token = jwt.sign({
 			id: user._id,
 			username: user.username
