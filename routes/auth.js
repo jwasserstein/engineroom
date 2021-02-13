@@ -5,7 +5,8 @@ const express                = require('express'),
 	  {isUserLoggedIn}       = require('../middleware/auth'),
 	  jwt                    = require('jsonwebtoken'),
 	  {checkMissingFields}   = require('../utils'),
-	  mongoose               = require('mongoose');
+	  {CognitoIdentityClient, 
+		GetOpenIdTokenForDeveloperIdentityCommand} = require('@aws-sdk/client-cognito-identity');
 
 router.post('/signup', async function(req, res) {
 	try {
@@ -24,9 +25,20 @@ router.post('/signup', async function(req, res) {
 			lastName: req.body.lastName,
 			friends: ['60251c79d3f1260004db5452', '60257901e61a5d0004c81830', '60257c3fe61a5d0004c81832', '602586a9e61a5d0004c8183a']
 		});
+
+		const client = new CognitoIdentityClient({region: 'us-east-1'});
+		const command = new GetOpenIdTokenForDeveloperIdentityCommand({
+			IdentityPoolId: 'us-east-1:a5f8a152-c8b9-4a8a-9505-03dcd77f39b1',
+			Logins: {
+				'engineroom-backend': user.username
+			}
+		});
+		const resp = await client.send(command);
+
 		const token = jwt.sign({
 			id: user._id,
-			username: user.username
+			username: user.username,
+			awsIdentityId: resp.IdentityId
 		}, process.env.SECRET_KEY);
 		const userObj = user.toObject();
 		delete userObj.password;
@@ -35,6 +47,8 @@ router.post('/signup', async function(req, res) {
 			id: user._id,
 			username: user.username,
 			users: [userObj],
+			awsIdentityId: resp.IdentityId,
+			awsToken: resp.Token,
 			token
 		});
 	} catch (err) {
@@ -55,9 +69,19 @@ router.post('/signin', async function (req, res) {
 		}
 		const isMatch = await bcrypt.compare(req.body.password, user.password);
 		if(isMatch){
+			const client = new CognitoIdentityClient({region: 'us-east-1'});
+			const command = new GetOpenIdTokenForDeveloperIdentityCommand({
+				IdentityPoolId: 'us-east-1:a5f8a152-c8b9-4a8a-9505-03dcd77f39b1',
+				Logins: {
+					'engineroom-backend': user.username
+				}
+			});
+			const resp = await client.send(command);
+
 			const token = jwt.sign({
 				id: user._id,
-				username: user.username
+				username: user.username,
+				awsIdentityId: resp.IdentityId
 			}, process.env.SECRET_KEY);
 
 			const userObj = user.toObject();
@@ -66,6 +90,8 @@ router.post('/signin', async function (req, res) {
 				id: user._id,
 				username: user.username,
 				users: [userObj],
+				awsIdentityId: resp.IdentityId,
+				awsToken: resp.Token,
 				token
 			});
 		} else {
@@ -97,6 +123,22 @@ router.post('/changePassword', isUserLoggedIn, async function(req, res){
 		const message = 'Successfully changed your password';
 		return res.json({message});
 	} catch (err) {
+		return res.status(500).json({error: err.message});
+	}
+});
+
+router.get('/awstoken', isUserLoggedIn, async function(req, res){
+	try {
+		const client = new CognitoIdentityClient({region: 'us-east-1'});
+		const command = new GetOpenIdTokenForDeveloperIdentityCommand({
+			IdentityPoolId: 'us-east-1:a5f8a152-c8b9-4a8a-9505-03dcd77f39b1',
+			Logins: {
+				'engineroom-backend': res.locals.user.username
+			}
+		});
+		const resp = await client.send(command);
+		res.json({token: resp.Token, identityId: resp.IdentityId});
+	} catch(err) {
 		return res.status(500).json({error: err.message});
 	}
 });
