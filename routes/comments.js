@@ -10,9 +10,9 @@ router.post('/', isUserLoggedIn, async function(req, res){
 		if(missingFields.length){
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
         }
-        
-        const {text} = req.body;
-        const {postId} = req.params;
+
+        const text = req.sanitize(req.body.text);
+        const postId = req.sanitize(req.params.postId);
 
         const post = await db.Posts.findById(postId);
         if(!post) return res.status(400).json({error: "That post doesn't exist"});
@@ -35,7 +35,8 @@ router.post('/', isUserLoggedIn, async function(req, res){
 
 router.delete('/:commentId', isUserLoggedIn, async function(req, res){
     try {
-        const {commentId, postId} = req.params;
+        const commentId = req.sanitize(req.params.commentId);
+        const postId = req.sanitize(req.params.postId);
 
         const comment = await db.Comments.findById(commentId);
         if(!comment) {

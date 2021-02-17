@@ -7,7 +7,7 @@ const express                = require('express'),
 
 
 router.get('/random/:num', isUserLoggedIn, async function(req, res){
-    const {num} = req.params;
+    const num = req.sanitize(req.params.num);
 
     if(!(+num > 0) || (+num % 1 !== 0)) { // !(+num > 0) is false if num <= 0 OR num = undefined
         return res.status(400).json({error: 'You must request a positive integer number of users'});
@@ -28,18 +28,22 @@ router.get('/random/:num', isUserLoggedIn, async function(req, res){
 
 router.get('/', isUserLoggedIn, async function(req, res) {
     try {
-        const ids = JSON.parse(req.query.ids);
+        const queryIds = req.sanitize(req.query.ids);
+        const cars = req.sanitize(req.query.cars);
+        const posts = req.sanitize(req.query.posts);
+
+        const ids = JSON.parse(queryIds);
         if(ids.length === 0) return res.status(400).json({error: "You must provide an array of user ids as a query string parameter called 'ids'"})
 
         const users = await db.Users.find({_id: {$in: ids.map(i => mongoose.Types.ObjectId(i))}}, {password: 0});
         const resp = {users};
-        if(req.query.cars === 'true') {
+        if(cars === 'true') {
             const carIds = [];
             users.forEach(u => u.cars.forEach(c => carIds.push(c)));
             const cars = await db.Cars.find({_id: {$in: carIds}});
             resp.cars = cars;
         }
-        if(req.query.posts === 'true'){
+        if(posts === 'true'){
             const postIds = [];
             users.forEach(u => u.posts.forEach(p => postIds.push(p)));
             const posts = await db.Posts.find({_id: {$in: postIds}}).populate('comments');
@@ -65,7 +69,7 @@ router.get('/', isUserLoggedIn, async function(req, res) {
 
 router.post('/:friendId/friend', isUserLoggedIn, async function(req, res){
     try {
-        const {friendId} = req.params;
+        const friendId = req.sanitize(req.params.friendId);
         
         const user = await db.Users.findById(res.locals.user.id);
 
@@ -92,7 +96,10 @@ router.put('/', isUserLoggedIn, async function(req, res){
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
         }
         
-        const {firstName, lastName, bio, imageUrl} = req.body;
+        const firstName = req.sanitize(req.body.firstName);
+        const lastName = req.sanitize(req.body.lastName);
+        const bio = req.sanitize(req.body.bio);
+        const imageUrl = req.sanitize(req.body.imageUrl);
 
         const user = await db.Users.findById(res.locals.user.id);
         user.firstName = firstName;

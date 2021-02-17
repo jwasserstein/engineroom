@@ -1,18 +1,24 @@
 require('dotenv').config();
-const express       = require('express'),
-	  app           = express(),
-	  bodyParser    = require('body-parser'),
-	  cors          = require('cors'),
-	  authRoutes    = require('./routes/auth'),
-	  carRoutes     = require('./routes/cars'),
-	  postRoutes    = require('./routes/posts'),
-	  commentRoutes = require('./routes/comments'),
-	  userRoutes    = require('./routes/users'),
+const express           = require('express'),
+	  app               = express(),
+	  bodyParser        = require('body-parser'),
+	  cors              = require('cors'),
+	  expressSanitizer  = require('express-sanitizer'),
+	  mongoSanitize     = require('express-mongo-sanitize'),
+	  helmet            = require('helmet'),
+	  authRoutes        = require('./routes/auth'),
+	  carRoutes         = require('./routes/cars'),
+	  postRoutes        = require('./routes/posts'),
+	  commentRoutes     = require('./routes/comments'),
+	  userRoutes        = require('./routes/users'),
 	  {redirectToHTTPS} = require('./middleware');
 
 app.use(redirectToHTTPS);
 app.use(cors());
 app.use(bodyParser.json());
+app.use(expressSanitizer());
+app.use(mongoSanitize());
+app.use(helmet());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/cars', carRoutes);

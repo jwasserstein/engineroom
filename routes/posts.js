@@ -12,7 +12,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
         }
         
-        const {text} = req.body;
+        const text = req.sanitize(req.body.text);
 
         const user = await db.Users.findById(res.locals.user.id);
         if(!user) return res.status(500).json({error: "Couldn't find your account"});
@@ -34,7 +34,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
 
 router.post('/:postId/like', isUserLoggedIn, async function(req, res){
     try {
-        const {postId} = req.params;
+        const postId = req.sanitize(req.params.postId);
         
         const post = await db.Posts.findById(postId).populate('comments');
         const preFilterLikes = post.likers.length;
@@ -53,10 +53,12 @@ router.get('/', isUserLoggedIn, async function(req, res){
     try {
         const user = await db.Users.findById(res.locals.user.id);
 
+        const queryIds = req.sanitize(req.query.ids);
+
         let posts, feedPostIds;
-        if(req.query.ids){
+        if(queryIds){
             // if a query string of post ids /posts?ids=[xxx, yyy, zzz] is provided, respond with the requested posts
-            let ids = JSON.parse(req.query.ids);
+            let ids = JSON.parse(queryIds);
             if(!ids.length) return res.status(400).json({error: "You must provide an array of post ids as a query string parameter called 'ids'"});
             ids = ids.map(i => mongoose.Types.ObjectId(i));
 

@@ -12,7 +12,12 @@ router.post('/', isUserLoggedIn, async function(req, res){
 			return res.status(400).json({error: 'Missing the following fields: ' + missingFields});
         }
 
-        const {name, imageUrl, mods, accelTime, power, torque} = req.body;
+        const name = req.sanitize(req.body.name);
+        const imageUrl = req.sanitize(req.body.imageUrl);
+        const accelTime = req.sanitize(req.body.accelTime);
+        const mods = req.sanitize(req.body.mods);
+        const power = req.sanitize(req.body.power);
+        const torque = req.sanitize(req.body.torque);
 
         const user = await db.Users.findById(res.locals.user.id);
         if(!user) return res.status(500).json({error: "Couldn't find your account"});
@@ -38,7 +43,7 @@ router.post('/', isUserLoggedIn, async function(req, res){
 
 router.get('/random/:num', isUserLoggedIn, async function(req, res){
     try {
-        const {num} = req.params;
+        const num = req.sanitize(req.params.num);
         if(!(+num > 0) || (+num % 1 !== 0)) {
             return res.status(400).json({error: 'Your must request a positive integer number of cars'})
         }
@@ -62,7 +67,8 @@ router.get('/', isUserLoggedIn, async function(req, res){
     try {
         const user = await db.Users.findById(res.locals.user.id);
 
-        let ids = JSON.parse(req.query.ids);
+        const queryIds = req.sanitize(req.query.ids);
+        let ids = JSON.parse(queryIds);
         if(!ids.length) return res.status(400).json({error: "You must provide an array of car ids as a query string parameter called 'ids'"});
         ids = ids.map(i => mongoose.Types.ObjectId(i));
 
