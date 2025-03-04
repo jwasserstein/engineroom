@@ -1,0 +1,71 @@
+.DetailedCar-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.DetailedCar-car {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.DetailedCar-car img {
+    width: 270px;
+}
+
+.DetailedCar-car-container {
+    flex-grow: 1;
+    padding-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.DetailedCar-car-container>div {
+    margin-top: 20px;
+}
+
+.DetailedCar-car-container h3 {
+    font-weight: 500;
+    font-size: 18px;
+    padding: 10px 0 5px 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.DetailedCar-car-container h4 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.DetailedCar-car-container p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.DetailedCar-spec-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+}
+
+@media (max-width: 600px){
+    .DetailedCar-car {
+        flex-direction: column;
+        margin: 0 auto 15px auto;
+    }
+
+    .DetailedCar-car img {
+        width: 100%;
+    }
+}

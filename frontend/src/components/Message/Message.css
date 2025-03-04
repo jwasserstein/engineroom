@@ -1,0 +1,55 @@
+.Message {
+    width: 90%;
+    max-width: 400px;
+    border-radius: 22.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.Message-red {
+    background-color: #FFCFCF;
+    color: #BC0D0D;
+    border: 1px solid #BC0D0D;
+}
+
+.Message-green {
+    background-color: #A1EB89;
+    color: #2C7712;
+    border: 1px solid #2C7712;
+}
+
+.Message h3 {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0;
+}
+
+.Message span {
+    font-weight: 500;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 50%;
+}
+
+.Message.Message-green span:hover {
+    background-color: #7BDD5B;
+}
+
+.Message.Message-red span:hover {
+    background-color: #FFB4B4;
+}

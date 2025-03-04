@@ -1,0 +1,31 @@
+.Options-container {
+    border-radius: 22.5px;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.Options-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, .28);
+    padding: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    background-color: white;
+}
+
+.Options-item:last-of-type{
+    border-bottom: none;
+}
+
+.Options-item:hover {
+    background-color: #EFEFEF;
+}

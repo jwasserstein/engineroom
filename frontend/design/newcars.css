@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #EAE8E5;
+    font-size: 16px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+}
+/* Begin Navbar */
+.Navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+
+.Navbar-brand h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.fa-car {
+    margin-right: 5px;
+}
+
+.Navbar a {
+    text-decoration: none;
+    color: black;
+}
+
+.Navbar a:hover {
+    text-decoration: underline;
+}
+
+.Navbar-links-right .Navbar-link {
+    padding: 0 20px;
+}
+
+.Navbar-links-left .Navbar-link {
+    padding: 0 20px;
+}
+
+.Navbar-burger {
+    width: 25px;
+    height: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 13px;
+    right: 15px;
+}
+
+.Navbar-burger:hover {
+    cursor: pointer;
+}
+
+.Navbar-burger:hover .Navbar-bar {
+    background-color: #3E3E3E;
+}
+
+.Navbar-bar {
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.Navbar-links-right, .Navbar-links-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Navbar-spacer {
+    height: 61px;
+}
+
+@media (max-width: 900px){
+    .Navbar-spacer {
+        height: 43px;
+    }
+    
+    .Navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px 5px 15px;
+    }
+
+    .Navbar.active {
+        background-color: #DAD8D8;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .Navbar-burger {
+        display: flex;
+    }
+
+    .Navbar-links-right, .Navbar-links-left {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .Navbar-links-right a.Navbar-link, .Navbar-links-left a.Navbar-link {
+        font-size: 20px;
+        padding: 15px 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #BFBFBF;
+    }
+
+    .Navbar-links-right a:last-of-type {
+        border: none;
+    }
+
+    .Navbar.active .Navbar-links-right, .Navbar.active .Navbar-links-left {
+        display: flex;
+    }
+}
+
+@media (min-width: 900px){
+    .Navbar .Navbar-signup-btn {
+        border: 1px solid black;
+        padding: 10px 15px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+    }
+
+    .Navbar .Navbar-signup-btn:hover {
+        background-color: #EFEFEF;
+        cursor: pointer;
+    }
+}
+/* End Navbar */
+
+/* Begin Footer */
+.Footer {
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.Footer-spacer {
+    height: 40px;
+}
+/* End Footer */
+
+/* Begin NewCarPage */
+.NewCarPage-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.NewCarPage-inner-container {
+    width: 100%;
+    max-width: 700px;
+}
+
+.NewCarPage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.NewCarPage-title {
+    padding: 10px;
+    margin: 30px 0 20px 0;
+}
+
+.NewCarPage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.NewCarPage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.NewCarPage-user {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    width: 270px;
+    padding: 25px;
+    text-align: center;
+    margin: 30px 75px 0 0;
+    flex-shrink: 0;
+}
+
+.NewCarPage-user img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+.NewCarPage-user h2 {
+    font-weight: 500;
+    font-size: 24px;
+    margin: 10px 0 1px 0;
+}
+
+.NewCarPage-user .NewCarPage-username {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    margin: 0;
+}
+
+.NewCarPage-user .NewCarPage-bio {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.NewCarPage-user div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.NewCarPage-user div a {
+    margin: 0;
+    flex-grow: 1;
+    flex-basis: 0;
+    color: black;
+    text-decoration: none;
+}
+
+.NewCarPage-user div a:hover {
+    text-decoration: underline;
+}
+
+.NewCarPage-user div a:first-of-type {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.NewCarPage-form {
+    padding: 20px 20px 0 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.NewCarPage-form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.NewCarPage-form-row>div {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.NewCarPage-form-row>div:first-of-type {
+    margin-left: 0;
+}
+
+.NewCarPage-form-row>div:last-of-type {
+    margin-right: 0;
+}
+
+.NewCarPage-form input {
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 3px 0 20px 0;
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.NewCarPage-form button {
+    width: 100%;
+    padding: 8px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.NewCarPage-form button:hover {
+    background-color: #424242;
+}
+
+.NewCarPage-form textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 3px 0 20px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.35); 
+    font-family: 'Roboto', sans-serif;
+    padding: 5px 10px;
+    font-size: 16px;
+    resize: none;
+    height: 160px;
+}
+
+div.NewCarPage-form-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+div.NewCarPage-image {
+    margin: 3px 0 20px 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.3);
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+}
+
+@media (max-width: 1000px){
+    .NewCarPage-user {
+        margin-right: 32.5px;
+    }
+}
+
+@media (max-width: 900px){
+    .NewCarPage-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .NewCarPage-user {
+        margin: 20px 0 0 0;
+    }
+
+    .NewCarPage-form-row:not(.NewCarPage-inner-row) {
+        flex-direction: column;
+    }
+
+    div.NewCarPage-image {
+        display: none;
+    }
+
+    .NewCarPage-form button {
+        margin: 3px 0 20px 0;
+    }
+
+    .NewCarPage-form-row>div:not(.NewCarPage-power) {
+        margin: 0;
+    }
+
+    .NewCarPage-form-row>div {
+        flex-basis: auto;
+    }
+
+    .NewCarPage-inner-row>div {
+        flex-basis: 0;
+    }
+}
+/* End NewCarPage */

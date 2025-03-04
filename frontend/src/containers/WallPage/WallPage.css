@@ -1,0 +1,82 @@
+.WallPage-container {
+    width: 97%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 30px;
+}
+
+.WallPage-feed-container {
+    flex-basis: 700px;
+    flex-shrink: 1;
+    margin: 0 15px;
+}
+
+.WallPage-cars-container {
+    flex-basis: 200px;
+    flex-shrink: 0;
+}
+
+.WallPage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.WallPage-title {
+    padding: 10px;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.WallPage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.WallPage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.WallPage-no-elements {
+    padding: 15px 10px;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.WallPage-no-elements p {
+    margin: 0;
+    text-align: center;
+}
+
+.WallPage-car-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px){
+    .WallPage-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .WallPage-cars-container {
+        display: none;
+    }
+
+    .WallPage-user-container {
+        margin-bottom: 15px;
+    }
+
+    .WallPage-feed-container {
+        flex-basis: 0;
+    }
+}

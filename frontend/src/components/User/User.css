@@ -1,0 +1,30 @@
+.User-person {
+    width: 150px;
+    background-color: white;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 22.5px;
+    border-bottom-right-radius: 22.5px;
+    margin: 0 7.5px 15px 7.5px;
+    color: black;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.User-person:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.30);
+}
+
+.User-person img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.User-person h3 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 0 8px;
+}

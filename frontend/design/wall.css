@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #EAE8E5;
+    font-size: 16px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+}
+/* Begin Navbar */
+.Navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+
+.Navbar-brand h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.fa-car {
+    margin-right: 5px;
+}
+
+.Navbar a {
+    text-decoration: none;
+    color: black;
+}
+
+.Navbar a:hover {
+    text-decoration: underline;
+}
+
+.Navbar-links-right .Navbar-link {
+    padding: 0 20px;
+}
+
+.Navbar-links-left .Navbar-link {
+    padding: 0 20px;
+}
+
+.Navbar-burger {
+    width: 25px;
+    height: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 13px;
+    right: 15px;
+}
+
+.Navbar-burger:hover {
+    cursor: pointer;
+}
+
+.Navbar-burger:hover .Navbar-bar {
+    background-color: #3E3E3E;
+}
+
+.Navbar-bar {
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.Navbar-links-right, .Navbar-links-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Navbar-spacer {
+    height: 61px;
+}
+
+@media (max-width: 900px){
+    .Navbar-spacer {
+        height: 43px;
+    }
+    
+    .Navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px 5px 15px;
+    }
+
+    .Navbar.active {
+        background-color: #DAD8D8;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .Navbar-burger {
+        display: flex;
+    }
+
+    .Navbar-links-right, .Navbar-links-left {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .Navbar-links-right a.Navbar-link, .Navbar-links-left a.Navbar-link {
+        font-size: 20px;
+        padding: 15px 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #BFBFBF;
+    }
+
+    .Navbar-links-right a:last-of-type {
+        border: none;
+    }
+
+    .Navbar.active .Navbar-links-right, .Navbar.active .Navbar-links-left {
+        display: flex;
+    }
+}
+
+@media (min-width: 900px){
+    .Navbar .Navbar-signup-btn {
+        border: 1px solid black;
+        padding: 10px 15px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+    }
+
+    .Navbar .Navbar-signup-btn:hover {
+        background-color: #EFEFEF;
+        cursor: pointer;
+    }
+}
+/* End Navbar */
+
+/* Begin Footer */
+.Footer {
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.Footer-spacer {
+    height: 40px;
+}
+/* End Footer */
+
+/* Begin WallPage */
+.WallPage-container {
+    width: 97%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.WallPage-feed-container {
+    flex-basis: 700px;
+    flex-shrink: 1;
+    margin: 0 15px;
+}
+
+.WallPage-cars-container {
+    flex-basis: 200px;
+    flex-shrink: 0;
+}
+
+.WallPage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.WallPage-title {
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.WallPage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.WallPage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.WallPage-car-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.WallPage-car {
+    background-color: white;
+    border-radius: 22.5px;
+    overflow: hidden;
+    width: 200px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    margin: 7.5px;
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.WallPage-car img {
+    width: 100%;
+}
+
+.WallPage-car h3 {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.WallPage-post {
+    padding: 20px;
+    margin-top: 15px;
+    overflow: auto;
+}
+
+.WallPage-post-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.WallPage-post-user>img {
+    width: 45px;
+    border-radius: 50%;
+    margin-right: 10px
+}
+
+.WallPage-post-user p {
+    margin: 0;
+}
+
+.WallPage-post-date {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.WallPage-post-text {
+    margin: 20px 0;
+}
+
+.WallPage-like-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.WallPage-like-container>div {
+    cursor: pointer;
+}
+
+.WallPage-like-container .fa-thumbs-up {
+    margin-right: 2px;
+}
+
+.WallPage-comments-arrow-expanded {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: translateX(-5px) translateY(-3px) rotate(-135deg);
+}
+
+.WallPage-comments-arrow-collapsed {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    transform: translateX(-5px) translateY(-3px) rotate(45deg);
+}
+
+.WallPage-comment-container>div:first-of-type {
+    margin-top: 20px;
+}
+
+.WallPage-comment-container>div:last-of-type {
+    margin-bottom: 0;
+}
+
+.WallPage-comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.WallPage-comment>span {
+    color: #AA4A4A;
+    cursor: pointer;
+}
+
+.WallPage-comment>img {
+    width: 30px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.WallPage-comment>div>span {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+}
+
+.WallPage-comment>div>p {
+    margin: 0;
+}
+
+.WallPage-comment-input {
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 5px 10px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.WallPage-like-green {
+    color: #39883C;
+}
+
+.WallPage-user {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    width: 270px;
+    padding: 25px;
+    text-align: center;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.WallPage-user img {
+    width: 200px;
+    border-radius: 50%;
+}
+
+.WallPage-user h2 {
+    font-weight: 500;
+    font-size: 24px;
+    margin: 10px 0 1px 0;
+}
+
+.WallPage-user .WallPage-username {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    margin: 0;
+}
+
+.WallPage-user .WallPage-bio {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.WallPage-user div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.WallPage-user div a {
+    margin: 0;
+    flex-grow: 1;
+    flex-basis: 0;
+    color: black;
+    text-decoration: none;
+}
+
+.WallPage-user div a:hover {
+    text-decoration: underline;
+}
+
+.WallPage-user div a:first-of-type {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.WallPage-user-container>button {
+    width: 270px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    display: block;
+}
+
+@media (max-width: 900px){
+    .WallPage-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .WallPage-cars-container {
+        display: none;
+    }
+
+    .WallPage-user {
+        margin: auto;
+    }
+
+    .WallPage-user-container button {
+        margin: 20px auto 20px auto;
+    }
+}
+/* End WallPage */

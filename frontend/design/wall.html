@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <link rel='stylesheet' type='text/css' href='wall.css' />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>EngineRoom | Your Wall</title>
+    </head>
+    <body>
+        <div class='Navbar-spacer'></div>
+        <header class='Navbar'>
+            <div class='Navbar-burger'>
+                <span class='Navbar-bar'></span>
+                <span class='Navbar-bar'></span>
+                <span class='Navbar-bar'></span>
+            </div>
+
+            <a href='#' class='Navbar-brand'><h1><i class="fa fa-car" aria-hidden="true"></i>EngineRoom</h1></a>
+            <div class='Navbar-links-left'>
+                <a href='#' class='Navbar-link'>Your Wall</a>
+                <a href='#' class='Navbar-link'>Your Feed</a>
+                <a href='#' class='Navbar-link'>Explore</a>
+                <a href='#' class='Navbar-link'>About</a>
+            </div>
+            <div class='Navbar-links-right'>
+                <a href='#' class='Navbar-link'>Log In</a>
+                <a href='#' class='Navbar-link Navbar-signup-btn'>Sign Up</a>
+            </div>
+        </header>
+
+        <div class='WallPage-container'>
+            <div class='WallPage-user-container'>
+                <div class='WallPage-user'>
+                    <img src='../images/me.jpeg' alt='me' />
+                    <h2>Justin Wasserstein</h2>
+                    <p class='WallPage-username'>@jwasserstein</p>
+                    <p class='WallPage-bio'>A mechanical engineer learning software!</p>
+                    <div>
+                        <a href='#'>Friends</a>
+                        <a href='#'>Cars</a>
+                    </div>
+                </div>
+                <button>Add Friend</button>
+            </div>
+
+            <div class='WallPage-feed-container'>
+                <div class='WallPage-title WallPage-blob'>
+                    <h2>Your Wall</h2>
+                    <p>Let your friends know what's on your mind</p>
+                </div>
+
+                <div class='WallPage-post WallPage-blob'>
+                    <div class='WallPage-post-user'>
+                        <img src='../images/me.jpeg' alt='me' />
+                        <div>
+                            <p>Justin Wasserstein</p>
+                            <p class='WallPage-post-date'>7:18am 1/20/2021</p>
+                        </div>
+                    </div>
+                    <p class='WallPage-post-text'>
+                        Figured it out!  I forgot to take the plastic wrap off the intake lol
+                    </p>
+                    <div class='WallPage-like-container'>
+                        <div class='WallPage-like-green'><i class="fa fa-thumbs-up" aria-hidden="true"></i>203 likes</div>
+                        <div><div class='WallPage-comments-arrow-collapsed'></div>18 comments</div>
+                    </div>
+                </div>
+
+                <div class='WallPage-post WallPage-blob'>
+                    <div class='WallPage-post-user'>
+                        <img src='../images/me.jpeg' alt='me' />
+                        <div>
+                            <p>Justin Wasserstein</p>
+                            <p class='WallPage-post-date'>7:00am 1/20/2021</p>
+                        </div>
+                    </div>
+                    <p class='WallPage-post-text'>
+                        My car is suddenly not running so well, kinda sluggish off the line.  
+                        Any ideas what it could be?
+                    </p>
+                    <div class='WallPage-like-container'>
+                        <div><i class="fa fa-thumbs-up" aria-hidden="true"></i>0 likes</div>
+                        <div><div class='WallPage-comments-arrow-collapsed'></div>1 comments</div>
+                    </div>
+                </div>
+
+                <div class='WallPage-post WallPage-blob'>
+                    <div class='WallPage-post-user'>
+                        <img src='../images/me.jpeg' alt='me' />
+                        <div>
+                            <p>Justin Wasserstein</p>
+                            <p class='WallPage-post-date'>6:40am 1/20/2021</p>
+                        </div>
+                    </div>
+                    <p class='WallPage-post-text'>
+                        Just added a cold air intake to my Civic!  The VTEC is so loud now!!!
+                    </p>
+                    <div class='WallPage-like-container'>
+                        <div><i class="fa fa-thumbs-up" aria-hidden="true"></i>16 likes</div>
+                        <div><div class='WallPage-comments-arrow-expanded'></div>3 comments</div>
+                    </div>
+                    <div class='WallPage-comment-container'>
+                        <div class='WallPage-comment'>
+                            <span>X</span>
+                            <img src='../images/me.jpeg' alt='me' />
+                            <div>
+                                <span>Justin Wasserstein</span>
+                                <p>It only cost 70 bucks at Autozone!!!</p>
+                            </div>
+                        </div>
+                        <div class='WallPage-comment'>
+                            <span>X</span>
+                            <img src='../images/man2.jpg' alt='man2' />
+                            <div>
+                                <span>John Doe</span>
+                                <p>Great find man!  I paid 80 for mine from Advanced Auto Parts!!</p>
+                            </div>
+                        </div>
+                        <div class='WallPage-comment'>
+                            <span>X</span>
+                            <img src='../images/woman1.jpg' alt='woman1' />
+                            <div>
+                                <span>Jane Smith</span>
+                                <p>Do those even work?</p>
+                            </div>
+                        </div>
+                        <input class='WallPage-comment-input' type='text' placeholder='Add a comment...' />
+                    </div>
+                </div>
+            </div>
+
+            <div class='WallPage-cars-container'>
+                <div class='WallPage-title WallPage-blob'>
+                    <h2>Your Cars</h2>
+                </div>
+                <div class='WallPage-car-container'>
+                    <a class='WallPage-car' href='#'>
+                        <img src='../images/mazda3.JPG' alt='Mazda3' />
+                        <h3>2014 Mazda 3</h3>
+                    </a>
+                </div>
+                <div class='WallPage-car-container'>
+                    <a class='WallPage-car' href='#'>
+                        <img src='../images/yamahafz6r.JPG' alt='FZ6R' />
+                        <h3>2012 Yamaha FZ6R</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class='Footer-spacer'></div>
+        <footer class='Footer'>
+            Copyright © 2021, Justin Wasserstein
+        </footer> 
+    </body>
+</html>

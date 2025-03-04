@@ -1,0 +1,159 @@
+.EditProfilePage-container {
+    width: 97%;
+    max-width: 550px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 30px 0 0 0;
+}
+
+.EditProfilePage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.EditProfilePage-title {
+    padding: 10px;
+    margin: 0 0 15px 0;
+}
+
+.EditProfilePage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.EditProfilePage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.EditProfilePage-form {
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.EditProfilePage-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.EditProfilePage-field-container {
+    flex-grow: 1;
+    margin-left: 40px;
+}
+
+.EditProfilePage-form input {
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 3px 0 15px 0;
+}
+
+.EditProfilePage-container::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.EditProfilePage-browse-button {
+    padding: 8px 18px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.EditProfilePage-submit-button {
+    padding: 8px 18px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.EditProfilePage-form button:hover {
+    background-color: #424242;
+}
+
+.EditProfilePage-form textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 3px 0 10px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.35); 
+    font-family: 'Roboto', sans-serif;
+    padding: 5px 10px;
+    font-size: 16px;
+    resize: none;
+    height: 180px;
+}
+
+.EditProfilePage-form input[type='file'] {
+    display: none;
+}
+
+.EditProfilePage-form label[for='image']:last-of-type {
+    padding: 8px 18px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.EditProfilePage-form label[for='image']:last-of-type:hover {
+    background-color: #424242;
+}
+
+.EditProfilePage-form label {
+    display: block;
+}
+
+.EditProfilePage-form img {
+    display: block;
+    margin-top: 5px;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 600px){
+    .EditProfilePage-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .EditProfilePage-title {
+        margin: 0 0 15px 0;
+    }
+
+    .EditProfilePage-form label[for='image']:last-of-type {
+        margin-bottom: 20px;
+    }
+
+    .EditProfilePage-field-container {
+        margin: 0;
+    }
+}

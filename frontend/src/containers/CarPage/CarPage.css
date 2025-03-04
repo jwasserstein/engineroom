@@ -1,0 +1,95 @@
+.CarPage-container {
+    width: 97%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 30px 0 0 0;
+}
+
+.CarPage-title-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.CarPage-add-btn {
+    padding: 12px 0;
+    text-align: center;
+    border-radius: 22.5px;
+    box-sizing: border-box;
+    flex-basis: 98px;
+    flex-grow: 0;
+    margin-left: 10px;
+}
+
+.CarPage-inner-container {
+    width: 100%;
+    flex-basis: 700px;
+    flex-shrink: 1;
+    margin-left: 20px;
+}
+
+.CarPage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.CarPage-title {
+    padding: 10px;
+    margin: 0 0 15px 0;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.CarPage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.CarPage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.CarPage-people-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.CarPage-spacer {
+    flex-basis: 215px;
+    flex-shrink: 10;
+}
+
+@media (max-width: 900px){
+    .CarPage-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .CarPage-spacer {
+        flex-basis: 0;
+        height: 0;
+    }
+
+    .CarPage-inner-container {
+        margin: 15px 0 0 0;
+    }
+}
+
+@media (max-width: 600px){
+    .CarPage-inner-container {
+        max-width: 325px;
+        flex-basis: 0;
+    }
+}

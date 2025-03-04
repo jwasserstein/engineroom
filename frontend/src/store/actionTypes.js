@@ -1,0 +1,12 @@
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
+export const GET_POSTS = 'GET_POSTS';
+export const GET_FEED_POSTS = 'GET_FEED_POSTS';
+export const ADD_POST = 'ADD_POST';
+export const REMOVE_POSTS = 'REMOVE_POSTS';
+export const GET_USERS = 'GET_USERS';
+export const GET_RANDOM_USERS = 'GET_RANDOM_USERS';
+export const REMOVE_USERS = 'REMOVE_USERS';
+export const GET_CARS = 'GET_CARS';
+export const GET_RANDOM_CARS = 'GET_RANDOM_CARS';
+export const REMOVE_CARS = 'REMOVE_CARS';

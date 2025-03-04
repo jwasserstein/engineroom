@@ -1,0 +1,84 @@
+.ExplorePage-container {
+    width: 90%;
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.ExplorePage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.ExplorePage-title {
+    padding: 10px;
+    margin: 30px 0 15px 0;
+}
+
+.ExplorePage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.ExplorePage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.ExplorePage-no-elements {
+    padding: 15px 10px;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.ExplorePage-no-elements p {
+    margin: 0;
+    text-align: center;
+}
+
+.ExplorePage-inner-container {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 0;
+}
+
+.ExplorePage-inner-container:first-of-type {
+    margin-right: 80px;
+}
+
+.ExplorePage-people-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.ExplorePage-car-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px){
+    .ExplorePage-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ExplorePage-inner-container:first-of-type{
+        margin: 0;
+    }
+
+    .ExplorePage-inner-container:last-of-type .ExplorePage-title {
+        margin-top: 15px;
+    }
+}

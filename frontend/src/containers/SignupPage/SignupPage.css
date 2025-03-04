@@ -1,0 +1,29 @@
+.SignupPage-container {
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    padding-bottom: 15px;
+}
+
+.SignupPage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.SignupPage-title {
+    padding: 10px;
+    margin: 30px 0 15px 0;
+}
+
+.SignupPage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.SignupPage-title p {
+    margin: 0;
+    text-align: center;
+}

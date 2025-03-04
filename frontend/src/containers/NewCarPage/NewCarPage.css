@@ -1,0 +1,196 @@
+.NewCarPage-container {
+    width: 97%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 30px 0 20px 0;
+}
+
+.NewCarPage-inner-container {
+    width: 100%;
+    flex-basis: 700px;
+    flex-shrink: 1;
+    margin-left: 15px;
+}
+
+.NewCarPage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.NewCarPage-title {
+    padding: 10px;
+    margin: 0 0 15px 0;
+}
+
+.NewCarPage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.NewCarPage-title p {
+    margin: 0;
+    text-align: center;
+}
+
+.NewCarPage-spacer {
+    flex-basis: 215px;
+    flex-shrink: 10;
+}
+
+.NewCarPage-form {
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.NewCarPage-form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.NewCarPage-form-row>div {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.NewCarPage-form-row>div:first-of-type {
+    margin-left: 0;
+}
+
+.NewCarPage-form-row>div:last-of-type {
+    margin-right: 0;
+}
+
+.NewCarPage-form input {
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 3px 0 15px 0;
+}
+
+.NewCarPage-container::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.NewCarPage-browse-button {
+    padding: 8px 18px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.NewCarPage-submit-button {
+    padding: 8px 18px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.NewCarPage-form button:hover {
+    background-color: #424242;
+}
+
+.NewCarPage-form textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 3px 0 10px 0;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.35); 
+    font-family: 'Roboto', sans-serif;
+    padding: 5px 10px;
+    font-size: 16px;
+    resize: none;
+    height: 180px;
+}
+
+.NewCarPage-form input[type='file'] {
+    display: none;
+}
+
+.NewCarPage-form label[for='image']:last-of-type {
+    padding: 8px 18px;
+    border-radius: 17.5px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.NewCarPage-form label[for='image']:last-of-type:hover {
+    background-color: #424242;
+}
+
+.NewCarPage-form label {
+    display: block;
+}
+
+.NewCarPage-form img {
+    display: block;
+    margin-top: 3px;
+    height: 180px;
+    width: 270px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+@media (max-width: 950px){
+    .NewCarPage-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .NewCarPage-inner-container {
+        margin: 0 10px;
+    }
+
+    .NewCarPage-title {
+        margin: 15px 0;
+    }
+
+    .NewCarPage-spacer {
+        flex-basis: 0;
+        height: 0;
+    }
+
+    .NewCarPage-form-row {
+        flex-direction: column;
+    }
+
+    .NewCarPage-form-row>div:not(.NewCarPage-power) {
+        margin: 0;
+    }
+
+    .NewCarPage-form-row>div {
+        flex-basis: auto;
+    }
+
+    .NewCarPage-form label[for='image']:last-of-type {
+        margin-bottom: 15px;
+    }
+}

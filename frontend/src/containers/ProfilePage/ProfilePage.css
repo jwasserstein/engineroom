@@ -1,0 +1,28 @@
+.ProfilePage-main-container {
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.ProfilePage-blob {
+    background-color: white;
+    border-radius: 22.5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.ProfilePage-title {
+    padding: 10px;
+    margin: 30px 0 15px 0;
+}
+
+.ProfilePage-title h2 {
+    margin: 0 0 2px 0;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.ProfilePage-title p {
+    margin: 0;
+    text-align: center;
+}
